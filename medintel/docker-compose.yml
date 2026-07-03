@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-medintel}
+      POSTGRES_USER: ${POSTGRES_USER:-medintel}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-medintel}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-medintel} -d ${POSTGRES_DB:-medintel}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+

@@ -1,0 +1,19 @@
+@layer utilities {
+  .healthcare-grid {
+    background-image:
+      linear-gradient(rgba(14, 165, 233, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14, 165, 233, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .glass-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.78));
+    backdrop-filter: blur(18px);
+  }
+
+  .section-title {
+    font-family: var(--font-sora), sans-serif;
+    letter-spacing: -0.03em;
+  }
+}
+
